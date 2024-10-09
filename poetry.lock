@@ -3989,6 +3989,32 @@ absl-py = ">=0.9,<3.0.0"
 protobuf = {version = ">=3.20.3,<4.21", markers = "python_version < \"3.11\""}
 
 [[package]]
+name = "tensorrt"
+version = "10.5.0"
+description = "TensorRT Metapackage"
+optional = false
+python-versions = "*"
+files = [
+    {file = "tensorrt-10.5.0.tar.gz", hash = "sha256:d5c6338d44aeda20250fdbe31f9df8ca152b830f811aaf19d6c4d1dafd18c84b"},
+]
+
+[package.dependencies]
+tensorrt-cu12 = "10.5.0"
+
+[[package]]
+name = "tensorrt-cu12"
+version = "10.5.0"
+description = "A high performance deep learning inference library"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "tensorrt-cu12-10.5.0.tar.gz", hash = "sha256:46edbda08c54c8ffa88c75d75b4761eb9839e81678135e8d1530adc8cef6a61b"},
+]
+
+[package.extras]
+numpy = ["numpy"]
+
+[[package]]
 name = "termcolor"
 version = "2.5.0"
 description = "ANSI color formatting for output in terminal"
@@ -4389,4 +4415,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "3.10.12"
-content-hash = "bf4d79646c783d5888e3bd1334cad2e94788e881d60b73306bebe175eeb9b3d9"
+content-hash = "8f01bfea95aca0c9520e6f2dbf9ed9f546205894d89fb8c33e9d86e2cd69e89d"
