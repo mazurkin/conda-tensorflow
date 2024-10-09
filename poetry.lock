@@ -3976,12 +3976,12 @@ tensorflow-rocm = ["tensorflow-rocm (>=2.16.0,<2.17.0)"]
 
 [[package]]
 name = "tensorflow-metadata"
-version = "1.16.0"
+version = "1.16.1"
 description = "Library and standards for schema and statistics."
 optional = false
 python-versions = "<4,>=3.9"
 files = [
-    {file = "tensorflow_metadata-1.16.0-py3-none-any.whl", hash = "sha256:e54c66a3d9874510548411b65b95590a8d77a660c63e4c13cee85e0a00468a70"},
+    {file = "tensorflow_metadata-1.16.1-py3-none-any.whl", hash = "sha256:2ce72ea31d78a00c0c74c6d465482335aa5cb2a3b2a104dedba0b258bc7bb18a"},
 ]
 
 [package.dependencies]
@@ -4415,4 +4415,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "3.10.12"
-content-hash = "8f01bfea95aca0c9520e6f2dbf9ed9f546205894d89fb8c33e9d86e2cd69e89d"
+content-hash = "b298c4471780fad12958b74b78b965b656df9f8f93390b1f3620ea3d80bdbf7b"
