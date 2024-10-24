@@ -9,6 +9,10 @@
 SHELL := /bin/bash
 ROOT  := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
+NB_HOST         ?= localhost
+NB_PORT_JUPYTER ?= 18888
+NB_PORT_TBOARD  ?= 16006
+
 CONDA_ENV_NAME = tensorflow
 
 export TF_ENABLE_ONEDNN_OPTS=0
@@ -24,12 +28,15 @@ export TF_CPP_MIN_LOG_LEVEL=2
 notebook:
 	@conda run --no-capture-output --live-stream --name $(CONDA_ENV_NAME) \
 		jupyter notebook \
-			--IdentityProvider.token='' \
-			--IdentityProvider.password_required='false' \
-			--ServerApp.use_redirect_file=True \
-			--ip=localhost \
-			--port=8888 \
-			--notebook-dir=$(ROOT)/notebooks
+			--ServerApp.use_redirect_file True \
+			--ip "$(NB_HOST)" \
+			--port $(NB_PORT_JUPYTER) \
+			--notebook-dir "$(ROOT)/notebooks"
+
+.PHONY: notebook-setup-password
+notebook-setup-password:
+	@conda run --no-capture-output --live-stream --name $(CONDA_ENV_NAME) \
+		jupyter notebook password
 
 # -----------------------------------------------------------------------------
 # conda environment
@@ -39,8 +46,6 @@ notebook:
 env-init:
 	@conda create --yes --name $(CONDA_ENV_NAME) \
 		python=3.10.12 \
-		cuda-toolkit=12.3.2 \
-		cudnn=8.9.2.26 \
 		conda-forge::poetry=1.8.3
 
 .PHONY: env-create
@@ -81,3 +86,29 @@ clean-logs:
 
 .PHONY: clean
 clean: clean-logs clean-data
+
+# -----------------------------------------------------------------------------
+# service
+# -----------------------------------------------------------------------------
+
+.PHONY: list-gpu
+list-gpu:
+	@conda run --no-capture-output --live-stream --name $(CONDA_ENV_NAME) \
+		python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+
+# -----------------------------------------------------------------------------
+# tensorboard
+# -----------------------------------------------------------------------------
+
+.PHONY: tensorboard
+tensorboard:
+	@conda run --no-capture-output --live-stream --name $(CONDA_ENV_NAME) \
+		tensorboard \
+			--logdir "$(ROOT)/notebooks/tensorboard" \
+			--samples_per_plugin "images=1024,scalars=8096" \
+			--host "$(NB_HOST)" \
+			--port "$(NB_PORT_TBOARD)"
+
+.PHONY: tensorboard-clean
+tensorboard-clean:
+	@rm -rf "$(ROOT)/notebooks/tensorboard/"
