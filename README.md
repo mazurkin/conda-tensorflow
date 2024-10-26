@@ -18,3 +18,7 @@ make notebook
 ## tensorflow
 
 - https://www.tensorflow.org/install/source#gpu
+
+## todo
+
+- https://github.com/tensorflow/tensorflow/issues/62075

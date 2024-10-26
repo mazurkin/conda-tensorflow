@@ -28,7 +28,7 @@ filelock = "3.15.4"
 
 [tool.poetry.group.tensorflow.dependencies]
 tensorboard = {version = "2.18.0"}
-tensorflow = {version = "2.18.0rc2", extras = ["and-cuda"]}
+tensorflow = {version = "2.18.0", extras = ["and-cuda"]}
 tensorflow-datasets = {version = "4.9.6"}
 
 [tool.poetry.group.tensorrt.dependencies]
