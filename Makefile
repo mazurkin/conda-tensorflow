@@ -49,9 +49,9 @@ notebook-list:
 
 .PHONY: env-init
 env-init:
-	@conda create --yes --name $(CONDA_ENV_NAME) \
-		python=3.10.12 \
-		conda-forge::poetry=1.8.3
+	@conda create --yes --copy --name $(CONDA_ENV_NAME) \
+		python=3.10.16 \
+		conda-forge::poetry=1.8.5
 
 .PHONY: env-create
 env-create:
