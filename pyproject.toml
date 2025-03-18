@@ -23,9 +23,6 @@ numpy = "1.26.4"
 plotly = "5.23"
 seaborn = "0.13.2"
 
-[tool.poetry.group.fix.dependencies]
-filelock = "3.15.4"
-
 [tool.poetry.group.tensorflow.dependencies]
 tensorflow = {version = "2.19.0", extras = ["and-cuda"]}
 tensorboard = {version = "2.19.0"}
