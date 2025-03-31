@@ -9,7 +9,7 @@
 SHELL := /bin/bash
 ROOT  := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-NB_HOST         ?= localhost
+NB_HOST         ?= 0.0.0.0
 NB_PORT_JUPYTER ?= 18888
 NB_PORT_TBOARD  ?= 16006
 
@@ -28,7 +28,9 @@ export TF_CPP_MIN_LOG_LEVEL=2
 notebook:
 	@conda run --no-capture-output --live-stream --name $(CONDA_ENV_NAME) \
 		jupyter notebook \
+			--ServerApp.open_browser False \
 			--ServerApp.use_redirect_file True \
+			--ServerApp.disable_check_xsrf True \
 			--ip "$(NB_HOST)" \
 			--port $(NB_PORT_JUPYTER) \
 			--notebook-dir "$(ROOT)/notebooks"
